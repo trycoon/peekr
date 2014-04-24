@@ -41,18 +41,18 @@ Blurry.Views = Blurry.Views || {};
             imageCanvas.save();
 
             // Create a circle
-            imageCanvas.beginPath();
+            /*imageCanvas.beginPath();
             imageCanvas.arc(106, 77, 10, 0, Math.PI * 2, false);
 
             // Clip to the current path
-            imageCanvas.clip();
+            imageCanvas.clip();*/
 
             imageCanvas.drawImage(img, 0, 0);
 
             // Undo the clipping
             imageCanvas.restore();
             //maskCanvas.drawImage(img, 0, 0);
-          }
+          };
 
           img.src = this.currentImage.url;
 
