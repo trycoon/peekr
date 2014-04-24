@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <script src="/path/to/oauth.js"></script>
-    <script type="text/javascript">
-        OAuth.initialize('d1RnDSEcEeSuMwhQCxUiAy_lN5w');
-        $.get( "", function( data ) {
-            OAuth.popup('google_plus', function (err, res) {
-                res.get('/plus/v1/people/me').done(function (me) {
-                    $('#connect').slideUp('fast')
-                    $('#res').html(template({
-                        data: me
-                    })).slideDown('fast')
+    <script src="/bower_components/oauth.io/oauth.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
 
-                    res.get('/plus/v1/people/me/activities/public').done(function(activities) {
-                        $('#activities').html(activitiesTemplate({
-                            data: activities
-                        }))
-                    });
-                })
-            })
+    <script type="text/javascript">
+        var access_token;
+        OAuth.initialize('BLyjDMMIj7nRjs2m3bCFWB0ZsTA');
+        //Using popup (option 1)
+        OAuth.popup('google', function(error, result) {
+            console.log(result);
+           // access_token = result.access_token;
+            console.log(error);
+            //handle error with error
+            //use result.access_token in your API request
         });
 
+        jQuery.support.cors = true;
 
+        $.ajax({
+            type: 'GET',
+            url: 'https://picasaweb.google.com/105814678861633692185/',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success: function(response, status, xhr) {
+                console.log('Jupiter client call success ' );
+            },
+            error: function(xhr, status, err) {
+                console.log('Jupiter client call failed ');
+            }
+        });
     </script>
     <meta charset="UTF-8">
     <title></title>
