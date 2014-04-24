@@ -17,12 +17,19 @@ Blurry.Views = Blurry.Views || {};
 
         events: {},
 
-        initialize: function () {
-            this.listenTo(this.model, 'change', this.render);
+        el: '#viewContent',
+
+        initialize: function (options) {
+          console.log('kk', options)
+          this.model = options;
+          this.listenTo(this.model, 'change', this.render);
+          this.render();
         },
 
         render: function () {
+          console.log('öö')
             this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.template());
         }
 
     });

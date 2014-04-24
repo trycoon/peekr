@@ -1,18 +1,25 @@
-/*global Application, $*/
+/*global Blurry, $*/
 
 
-window.Application = {
+window.Blurry = {
     Models: {},
     Collections: {},
     Views: {},
     Routers: {},
+    application: null,
+
     init: function () {
         'use strict';
-        console.log('Hello from Backbone!');
+      //this.routes = new this.Routers.Application();
+     // var m = new this.Models.Application()
+        //console.log('main init', this.Views.Start);
+      //this.application = new this.Views.Application(m);
+      this.Views.start = new this.Views.Start();
+
     }
 };
 
 $(document).ready(function () {
     'use strict';
-    Application.init();
+  Blurry.init();
 });
