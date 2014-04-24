@@ -7,7 +7,7 @@ Blurry.Views = Blurry.Views || {};
 
     Blurry.Views.Spela = Backbone.View.extend({
 
-        template: JST['app/scripts/templates/spela.ejs'],
+        template: JST['app/scripts/templates/spela.hbs'],
 
         tagName: 'div',
 
