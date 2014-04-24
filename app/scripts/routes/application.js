@@ -6,7 +6,16 @@ Blurry.Routers = Blurry.Routers || {};
     'use strict';
 
     Blurry.Routers.Application = Backbone.Router.extend({
+      routes: {
+        '': 'start',
+        '/spela': 'spela'
+      },
+      start: function(){
 
+      },
+      spela: function(){
+
+      }
     });
 
 })();
