@@ -20,11 +20,11 @@
 
         $.ajax({
             type: 'GET',
-            url: 'https://picasaweb.google.com/105814678861633692185/',
-            xhrFields: {
-                withCredentials: true
-            },
-            crossDomain: true,
+            url: 'https://picasaweb.google.com/data/feed/api/user/105814678861633692185/',
+            jsonp: "callback",
+
+            // tell jQuery we're expecting JSONP
+            dataType: "jsonp",
             success: function(response, status, xhr) {
                 console.log('Jupiter client call success ' );
             },
