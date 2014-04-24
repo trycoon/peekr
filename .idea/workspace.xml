@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c4c1410d-e641-4b40-8431-dd8eb3207084" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/blurry_node_modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client_secret_540858935753-u7e9q2irjifr5lk8ma5uas26dvhnq8ih.apps.googleusercontent.com.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLinters/gjslint.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/scripts/oauth2.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/templates/application.ejs" afterPath="$PROJECT_DIR$/app/scripts/templates/application.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/views/application.js" afterPath="$PROJECT_DIR$/app/scripts/views/application.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/main.js" afterPath="$PROJECT_DIR$/app/scripts/main.js" />
     </list>
     <ignored path="blurry.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +31,7 @@
       <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="12" selection-start="178" selection-end="178" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+            <state line="12" column="53" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -47,7 +42,7 @@
       <file leaf-file-name="application.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/views/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
+            <state line="26" column="29" selection-start="514" selection-end="514" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -55,10 +50,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="application.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/models/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="45" selection-start="355" selection-end="355" vertical-scroll-proportion="0.50933784" vertical-offset="0" max-vertical-offset="589">
+            <state line="21" column="23" selection-start="379" selection-end="379" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -69,16 +64,16 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="0" selection-start="685" selection-end="685" vertical-scroll-proportion="-8.125" vertical-offset="60" max-vertical-offset="630">
+            <state line="18" column="0" selection-start="722" selection-end="722" vertical-scroll-proportion="-10.625" vertical-offset="15" max-vertical-offset="630">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.ejs" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.ejs" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/scripts/templates/application.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="18" selection-end="18" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="120">
+            <state line="3" column="0" selection-start="30" selection-end="30" vertical-scroll-proportion="0.07964602" vertical-offset="0" max-vertical-offset="565">
               <folding />
             </state>
           </provider>
@@ -87,7 +82,7 @@
       <file leaf-file-name="application.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/routes/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+            <state line="8" column="0" selection-start="161" selection-end="161" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -114,13 +109,14 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/app/index.html" />
-        <option value="$PROJECT_DIR$/app/scripts/templates/application.ejs" />
+        <option value="$PROJECT_DIR$/app/scripts/main.js" />
         <option value="$PROJECT_DIR$/app/scripts/views/application.js" />
+        <option value="$PROJECT_DIR$/app/scripts/templates/application.ejs" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="20" />
+    <option name="x" value="21" />
     <option name="y" value="22" />
     <option name="width" value="1170" />
     <option name="height" value="737" />
@@ -286,6 +282,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blurry" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blurry" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -364,7 +382,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="20" y="22" width="1170" height="737" extended-state="0" />
+    <frame x="21" y="22" width="1170" height="737" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -412,41 +430,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/main.js">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="12" selection-start="178" selection-end="178" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/routes/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+        <state line="8" column="0" selection-start="161" selection-end="161" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.html">
+    <entry file="file://$PROJECT_DIR$/app/scripts/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="685" selection-end="685" vertical-scroll-proportion="-8.125" vertical-offset="60" max-vertical-offset="630">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/templates/application.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="18" selection-end="18" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="120">
-          <folding />
+        <state line="12" column="53" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/views/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
+        <state line="26" column="29" selection-start="514" selection-end="514" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -455,10 +466,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/models/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="45" selection-start="355" selection-end="355" vertical-scroll-proportion="0.50933784" vertical-offset="0" max-vertical-offset="589">
+        <state line="21" column="23" selection-start="379" selection-end="379" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="722" selection-end="722" vertical-scroll-proportion="-10.625" vertical-offset="15" max-vertical-offset="630">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/templates/application.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="30" selection-end="30" vertical-scroll-proportion="0.07964602" vertical-offset="0" max-vertical-offset="565">
+          <folding />
         </state>
       </provider>
     </entry>
