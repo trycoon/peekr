@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <script src="/bower_components/oauth.io/oauth.js"></script>
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/oauth.io/oauth.js"></script>
+
 
     <script type="text/javascript">
         var access_token;
@@ -17,16 +18,18 @@
         });
 
         jQuery.support.cors = true;
+        var resp;
 
         $.ajax({
             type: 'GET',
-            url: 'https://picasaweb.google.com/data/feed/api/user/105814678861633692185/',
-            jsonp: "callback",
-
+            url: 'https://picasaweb.google.com/data/feed/api/user/105814678861633692185/albumid/6005765907437818049',
+            jsonp: "parseResponse",
             // tell jQuery we're expecting JSONP
             dataType: "jsonp",
             success: function(response, status, xhr) {
                 console.log('Jupiter client call success ' );
+                console.log(resp);
+
             },
             error: function(xhr, status, err) {
                 console.log('Jupiter client call failed ');
