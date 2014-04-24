@@ -7,7 +7,7 @@ Blurry.Views = Blurry.Views || {};
 
     Blurry.Views.Start = Backbone.View.extend({
 
-        //template: JST['app/scripts/templates/start.ejs'],
+        template: JST['app/scripts/templates/start.hbs'],
 
         tagName: 'div',
 
