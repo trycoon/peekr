@@ -16,14 +16,25 @@ Blurry.Views = Blurry.Views || {};
         className: '',
 
         events: {},
+      el: '#viewSpela',
 
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
+          this.hide();
+          this.render();
         },
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
-        }
+        },
+
+      show: function() {
+        this.$el.show();
+      },
+
+      hide: function() {
+        this.$el.hide();
+      }
 
     });
 

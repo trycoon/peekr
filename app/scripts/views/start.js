@@ -15,18 +15,30 @@ Blurry.Views = Blurry.Views || {};
 
         className: '',
 
-        events: {},
+        events: {
+          'click .js-toggle': 'toggel'
+        },
         el: '#viewContent',
+      toggel: function(){
+
+        Blurry.Routers.router.navigate('spela', {trigger: true});
+      },
 
         initialize: function () {
-            //this.listenTo(this.model, 'change', this.render);
+          this.listenTo(this.model, 'change', this.render);
           this.render();
         },
 
         render: function () {
-            //this.$el.html(this.template(this.model.toJSON()));
-            this.$el.html('StartVyn!');
-        }
+            this.$el.html(this.template(this.model.toJSON()));
+        },
+      show: function() {
+        this.$el.show();
+      },
+
+      hide: function() {
+        this.$el.hide();
+      }
 
     });
 
