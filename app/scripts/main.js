@@ -1,7 +1,7 @@
-/*global Blurry, $*/
+/*global Application, $*/
 
 
-window.Blurry = {
+window.Application = {
     Models: {},
     Collections: {},
     Views: {},
@@ -14,5 +14,5 @@ window.Blurry = {
 
 $(document).ready(function () {
     'use strict';
-    Blurry.init();
+    Application.init();
 });

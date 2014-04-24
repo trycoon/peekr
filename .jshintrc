@@ -20,8 +20,8 @@
     "smarttabs": true,
     "jquery": true,
     "globals": {
-        "Blurry": true,
-        "blurry": true,
+        "Application": true,
+        "application": true,
         "_": false,
         "Backbone": false,
         "JST": false,
