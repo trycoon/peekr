@@ -2,34 +2,34 @@
 
 Blurry.Views = Blurry.Views || {};
 
-(function () {
-    'use strict';
+(function() {
+  'use strict';
 
-    Blurry.Views.Application = Backbone.View.extend({
+  Blurry.Views.Application = Backbone.View.extend({
 
-        template: JST['app/scripts/templates/application.ejs'],
+    template: JST['app/scripts/templates/application.ejs'],
 
-        tagName: 'div',
+    tagName: 'div',
 
-        id: '',
+    id: '',
 
-        className: '',
+    className: '',
 
-        events: {},
+    events: {},
 
-        el: '#viewContent',
+    el: '#viewContent',
 
-        initialize: function (options) {
-          this.model = options;
-          this.listenTo(this.model, 'change', this.render);
-          this.render();
-        },
+    initialize: function(options) {
+      this.model = options;
+      this.listenTo(this.model, 'change', this.render);
+      this.render();
+    },
 
-        render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
-            this.$el.html(this.template());
-        }
+    render: function() {
+      this.$el.html(this.template(this.model.toJSON()));
+      this.$el.html(this.template());
+    }
 
-    });
+  });
 
 })();

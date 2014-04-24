@@ -14,7 +14,7 @@ Blurry.Routers = Blurry.Routers || {};
     changeView: function(view) {
       if (this.currentView) {
         this.currentView.hide();
-      }else{
+      } else {
         Blurry.Views.start.hide();
       }
 
@@ -24,7 +24,7 @@ Blurry.Routers = Blurry.Routers || {};
       }
     },
 
-    initialize: function(){
+    initialize: function() {
 
     },
 

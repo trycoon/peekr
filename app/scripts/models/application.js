@@ -2,25 +2,25 @@
 
 Blurry.Models = Blurry.Models || {};
 
-(function () {
-    'use strict';
+(function() {
+  'use strict';
 
-    Blurry.Models.Application = Backbone.Model.extend({
+  Blurry.Models.Application = Backbone.Model.extend({
 
-        url: '',
+    url: '',
 
-        initialize: function() {
-        },
+    initialize: function() {
+    },
 
-        defaults: {
-        },
+    defaults: {
+    },
 
-        validate: function(attrs, options) {
-        },
+    validate: function(attrs, options) {
+    },
 
-        parse: function(response, options)  {
-            return response;
-        }
-    });
+    parse: function(response, options) {
+      return response;
+    }
+  });
 
 })();
