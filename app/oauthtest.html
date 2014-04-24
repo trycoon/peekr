@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="/path/to/oauth.js"></script>
+    <script type="text/javascript">
+        OAuth.initialize('d1RnDSEcEeSuMwhQCxUiAy_lN5w');
+        $.get( "", function( data ) {
+            OAuth.popup('google_plus', function (err, res) {
+                res.get('/plus/v1/people/me').done(function (me) {
+                    $('#connect').slideUp('fast')
+                    $('#res').html(template({
+                        data: me
+                    })).slideDown('fast')
+
+                    res.get('/plus/v1/people/me/activities/public').done(function(activities) {
+                        $('#activities').html(activitiesTemplate({
+                            data: activities
+                        }))
+                    });
+                })
+            })
+        });
+
+
+    </script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
