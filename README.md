@@ -17,4 +17,4 @@ bower install
 ```
 
 # Starta applikation
-``` grunt server ```
+``` grunt serve ```
