@@ -10,11 +10,11 @@ window.Blurry = {
 
     init: function () {
         'use strict';
-      //this.routes = new this.Routers.Application();
-     // var m = new this.Models.Application()
-        //console.log('main init', this.Views.Start);
-      //this.application = new this.Views.Application(m);
-      this.Views.start = new this.Views.Start();
+      Backbone.history.start();
+      this.Routers.router = new this.Routers.Application();
+      this.Views.start = new this.Views.Start({model: new this.Models.Start()});
+      this.Views.spela = new this.Views.Spela({model: new this.Models.Spela()});
+
 
     }
 };
