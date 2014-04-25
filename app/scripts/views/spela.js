@@ -47,6 +47,8 @@ Blurry.Views = Blurry.Views || {};
         window.alert('Din webbläsare saknar stöd för Canvas.');
       }
 
+      this.currentDifficulty = 3;
+      
       this.imageCanvasContext = this.imagePlaceholder[0].getContext('2d');
       this.imageOriginalCanvas = document.createElement('canvas');
       this.imageOriginalCanvasContext = this.imageOriginalCanvas.getContext('2d');
