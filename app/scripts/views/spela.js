@@ -93,7 +93,7 @@ Blurry.Views = Blurry.Views || {};
       // Clip to the current path
       this.imageCanvas.clip();
 
-      this.imageCanvas.drawImage(this.imageElement, 0, 0);
+      this.imageCanvas.drawImage(this.imageElement, 0, 0,300,300);
 
       // Undo the clipping
       this.imageCanvas.restore();
