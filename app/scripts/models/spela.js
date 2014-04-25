@@ -32,11 +32,11 @@ Blurry.Models = Blurry.Models || {};
 
     getImage: function() {
       this.currentImage = this.getRandomImage();
-
       return this.currentImage;
     },
 
     validateName: function(name) {
+      console.log('validateName... ' + this.currentImage.name);
       return this.currentImage.name.toLowerCase() === name.toLowerCase();
     },
 
