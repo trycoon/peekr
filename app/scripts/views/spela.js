@@ -48,7 +48,7 @@ Blurry.Views = Blurry.Views || {};
       }
 
       this.currentDifficulty = 3;
-      
+
       this.imageCanvasContext = this.imagePlaceholder[0].getContext('2d');
       this.imageOriginalCanvas = document.createElement('canvas');
       this.imageOriginalCanvasContext = this.imageOriginalCanvas.getContext('2d');
@@ -80,13 +80,12 @@ Blurry.Views = Blurry.Views || {};
       if (this.currentImage) {
         var self = this;
 
-      // Ladda ner bilden som skall visas.
-      this.imageElement = new Image();
-      this.imageElement.onload = function() {
-        self.imageOriginalCanvasContext.drawImage(self.imageElement, 0, 0, 300, 300);  // Rita ut bilden första gången på canvasen.
-        // Maskera och visa bilden när den är nerladdad.
-        self.drawMask(110, 70, self.holeSizes[self.currentDifficulty]);
-      };
+        // Ladda ner bilden som skall visas.
+        this.imageElement = new Image();
+        this.imageElement.onload = function() {
+          // Maskera och visa bilden när den är nerladdad.
+          self.drawMask(110, 70, self.holeSizes[self.currentDifficulty]);
+        };
 
         this.imageElement.src = this.currentImage.url;
       }
@@ -99,7 +98,9 @@ Blurry.Views = Blurry.Views || {};
      * @param holeRadius {number} Titthålets radie(storlek).
      */
     drawMask: function(holeX, holeY, holeRadius) {
-      //this.imageOriginalCanvas.drawImage(this.imageElement, 0, 0, 300, 300);
+      this.imageCanvasContext.rect(0, 0, 300, 300);
+      this.imageCanvasContext.fillStyle = 'grey';
+      this.imageCanvasContext.fill();
 
       this.imageCanvasContext.save();
 
@@ -139,14 +140,15 @@ Blurry.Views = Blurry.Views || {};
         $('#inputContainer').hide();
         $('.js-next').show();
 
-      }else{
+      } else {
         answer.html('Det var fel namn...');
-        if(this.currentDifficulty > 0){
+        if (this.currentDifficulty > 0) {
           this.currentDifficulty--;
         }
       }
 
-      setTimeout(function(){}, 500);
+      setTimeout(function() {
+      }, 500);
     }
   });
 
