@@ -17,24 +17,27 @@
             //use result.access_token in your API request
         });
 
-        jQuery.support.cors = true;
         var resp;
 
         $.ajax({
             type: 'GET',
             url: 'https://picasaweb.google.com/data/feed/api/user/105814678861633692185/albumid/6005765907437818049',
-            jsonp: "parseResponse",
-            // tell jQuery we're expecting JSONP
             dataType: "jsonp",
+            data: {
+                alt: 'json-in-script'
+                //fields: 'entry(title,content)'  //Filter what we need
+            },
+            jsonpCallback: 'picasaCallback',
             success: function(response, status, xhr) {
                 console.log('Jupiter client call success ' );
-                console.log(resp);
+                console.log(response);
 
             },
             error: function(xhr, status, err) {
                 console.log('Jupiter client call failed ');
             }
         });
+
     </script>
     <meta charset="UTF-8">
     <title></title>
