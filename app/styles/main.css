@@ -1,9 +1,21 @@
 body {
-    background: #fafafa;
+    background: #e3e3e3;
+    font-family: Arial;
+    font-size: 12;
 }
 
 #image {
     width: 620px;
     height: 300px;
     border: 1px solid;
+}
+
+.answer {
+    color: #cc0000;
+    font-family: Arial;
+    font-size: 12;
+}
+
+.answer.correct {
+    color: #00cc00;
 }
