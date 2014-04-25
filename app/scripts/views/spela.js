@@ -21,9 +21,12 @@ Blurry.Views = Blurry.Views || {};
     el: '#viewSpela',
 
     initialize: function() {
+      this.model.fetch({dataType: 'jsonp', data: {
+        alt: 'json-in-script'
+      }});
       this.listenTo(this.model, 'change', this.render);
       this.hide();
-      this.render();
+      //this.render();
     },
 
     render: function() {
@@ -79,9 +82,10 @@ Blurry.Views = Blurry.Views || {};
         answer.addClass('correct');
         answer.html('Rätt!');
       }else{
-        answer.html('Fel!');
+        answer.html('Det var fel namn...');
       }
-      console.log('input ', answer.innerHTML);
+
+      setTimeout(function(){}, 500);
     }
 
   });
