@@ -70,7 +70,7 @@ Blurry.Models = Blurry.Models || {};
     /**
      * Funktion som lyssnar efter ett uttalat ord, måste anropas inför varje gång man förväntar sig ett nytt ord.
      */
-    startListiningOnSpeech: function() {
+    startListiningOnSpeech: function(callback) {
       if (SpeechRecognition) {
         var recognition = new SpeechRecognition();
         recognition.lang = 'sv-SE';
@@ -80,6 +80,9 @@ Blurry.Models = Blurry.Models || {};
           if (event.results.length > 0) {
             var word = event.results[0][0].transcript;
             console.log('Detected speech: ' + word);
+            if (callback) {
+              callback(word);
+            }
           }
         };
         recognition.start();
