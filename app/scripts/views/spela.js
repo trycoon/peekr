@@ -14,6 +14,7 @@ Blurry.Views = Blurry.Views || {};
     id: '',
 
     className: '',
+    points: 0,
 
     imagePlaceholder: undefined,
     imageCanvasContext: undefined,
@@ -48,7 +49,7 @@ Blurry.Views = Blurry.Views || {};
       }
 
       this.currentDifficulty = 3;
-      
+
       this.imageCanvasContext = this.imagePlaceholder[0].getContext('2d');
       this.imageOriginalCanvas = document.createElement('canvas');
       this.imageOriginalCanvasContext = this.imageOriginalCanvas.getContext('2d');
@@ -60,6 +61,8 @@ Blurry.Views = Blurry.Views || {};
       //this.imageCanvasContext.addEventListener('mousedown', startDraw);
       this.imagePlaceholder.bind('mousemove', $.proxy(this.updateMaskPosition, this));
       //this.imageCanvasContext.addEventListener('mouseup', stopDraw);
+
+      $('#points').html('Poäng: ' + this.points);
 
       this.drawImage();
     },
@@ -131,23 +134,32 @@ Blurry.Views = Blurry.Views || {};
 
       console.log('input ', validation);
       var answer = $('.answer');
-
+      var answerStr = '';
 
       if (validation) {
         answer.addClass('correct');
-        answer.html('Du gissade rätt!');
-        $('#inputContainer').hide();
-        $('.js-next').show();
-
+        answerStr = 'Du gissade rätt!';
+        this.showImage();
       }else{
-        answer.html('Det var fel namn...');
+        answerStr = 'Det var fel namn.';
         if(this.currentDifficulty > 0){
           this.currentDifficulty--;
+        }else{
+          answerStr += ' Det var ' + this.currentImage.name;
+          this.showImage();
         }
       }
 
-      setTimeout(function(){}, 500);
+      answer.html(answerStr);
+    },
+
+    showImage: function(){
+      $('#inputContainer').hide();
+      $('.js-next').show();
+      this.points += this.currentDifficulty * 10;
+      $('#points').html('Poäng: ' + this.points);
     }
+
   });
 
 })();
