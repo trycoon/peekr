@@ -69,7 +69,19 @@ Blurry.Views = Blurry.Views || {};
 
     validateName: function(event) {
       event.preventDefault();
-      console.log('input ', this.model.validateName($('.js-input').val()));
+      var validation = this.model.validateName($('.js-input').val());
+
+      console.log('input ', validation);
+      var answer = $('.answer');
+
+
+      if(validation){
+        answer.addClass('correct');
+        answer.html('Rätt!');
+      }else{
+        answer.html('Fel!');
+      }
+      console.log('input ', answer.innerHTML);
     }
 
   });
