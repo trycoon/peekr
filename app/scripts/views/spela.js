@@ -16,7 +16,9 @@ Blurry.Views = Blurry.Views || {};
     className: '',
 
     imagePlaceholder: undefined,
-    imageCanvas: undefined,
+    imageCanvasContext: undefined,
+    imageOriginalCanvasContext: undefined,
+    imageOriginalCanvas: undefined,
     imageElement: undefined,
     currentDifficulty: 3, // Index till holeSize, lägre = enklare.
     holeSizes: [30, 20, 15, 10],
@@ -33,22 +35,29 @@ Blurry.Views = Blurry.Views || {};
       }});
       this.listenTo(this.model, 'change', this.render);
       this.hide();
+      //this.render();
     },
 
     render: function() {
-      console.log('render')
       this.$el.html(this.template(this.model.toJSON()));
       $('.js-next').hide();
       this.imagePlaceholder = $('#image');
-      this.imageCanvas = this.imagePlaceholder[0].getContext('2d');
 
-      //this.imageCanvas.addEventListener('touchstart', startDraw);
+      if (!this.imagePlaceholder[0].getContext) {
+        window.alert('Din webbläsare saknar stöd för Canvas.');
+      }
+
+      this.imageCanvasContext = this.imagePlaceholder[0].getContext('2d');
+      this.imageOriginalCanvas = document.createElement('canvas');
+      this.imageOriginalCanvasContext = this.imageOriginalCanvas.getContext('2d');
+
+      //this.imageCanvasContext.addEventListener('touchstart', startDraw);
       this.imagePlaceholder.bind('touchmove', $.proxy(this.updateMaskPosition, this));
-      //this.imageCanvas.addEventListener('touchend', stopDraw);
+      //this.imageCanvasContext.addEventListener('touchend', stopDraw);
 
-      //this.imageCanvas.addEventListener('mousedown', startDraw);
+      //this.imageCanvasContext.addEventListener('mousedown', startDraw);
       this.imagePlaceholder.bind('mousemove', $.proxy(this.updateMaskPosition, this));
-      //this.imageCanvas.addEventListener('mouseup', stopDraw);
+      //this.imageCanvasContext.addEventListener('mouseup', stopDraw);
 
       this.drawImage();
     },
@@ -65,17 +74,17 @@ Blurry.Views = Blurry.Views || {};
     },
 
     drawImage: function() {
-      console.log('drawImage')
       this.currentImage = this.model.getImage();
       if (this.currentImage) {
         var self = this;
 
-        // Ladda ner bilden som skall visas.
-        this.imageElement = new Image();
-        this.imageElement.onload = function() {
-          // Maskera och visa bilden när den är nerladdad.
-          self.drawMask(110, 70, self.holeSizes[self.currentDifficulty]);
-        };
+      // Ladda ner bilden som skall visas.
+      this.imageElement = new Image();
+      this.imageElement.onload = function() {
+        self.imageOriginalCanvasContext.drawImage(self.imageElement, 0, 0, 300, 300);  // Rita ut bilden första gången på canvasen.
+        // Maskera och visa bilden när den är nerladdad.
+        self.drawMask(110, 70, self.holeSizes[self.currentDifficulty]);
+      };
 
         this.imageElement.src = this.currentImage.url;
       }
@@ -88,19 +97,21 @@ Blurry.Views = Blurry.Views || {};
      * @param holeRadius {number} Titthålets radie(storlek).
      */
     drawMask: function(holeX, holeY, holeRadius) {
-      this.imageCanvas.save();
+      //this.imageOriginalCanvas.drawImage(this.imageElement, 0, 0, 300, 300);
+
+      this.imageCanvasContext.save();
 
       // Create a circle
-      this.imageCanvas.beginPath();
-      this.imageCanvas.arc(holeX, holeY, holeRadius, 0, Math.PI * 2, false);
+      this.imageCanvasContext.beginPath();
+      this.imageCanvasContext.arc(holeX, holeY, holeRadius, 0, Math.PI * 2, false);
 
       // Clip to the current path
-      this.imageCanvas.clip();
+      this.imageCanvasContext.clip();
 
-      this.imageCanvas.drawImage(this.imageElement, 0, 0,300,300);
+      this.imageCanvasContext.drawImage(this.imageElement, 0, 0, 300, 300);
 
       // Undo the clipping
-      this.imageCanvas.restore();
+      this.imageCanvasContext.restore();
     },
 
     show: function() {
@@ -120,7 +131,7 @@ Blurry.Views = Blurry.Views || {};
       var answer = $('.answer');
 
 
-      if(validation){
+      if (validation) {
         answer.addClass('correct');
         answer.html('Du gissade rätt!');
         $('#inputContainer').hide();
