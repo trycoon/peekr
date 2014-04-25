@@ -54,6 +54,14 @@ Blurry.Views = Blurry.Views || {};
       this.imageOriginalCanvas = document.createElement('canvas');
       this.imageOriginalCanvasContext = this.imageOriginalCanvas.getContext('2d');
 
+      this.startTrackMove();
+
+      $('#points').html('Poäng: ' + this.points);
+
+      this.drawImage();
+    },
+
+    startTrackMove: function() {
       //this.imageCanvasContext.addEventListener('touchstart', startDraw);
       this.imagePlaceholder.bind('touchmove', $.proxy(this.updateMaskPosition, this));
       //this.imageCanvasContext.addEventListener('touchend', stopDraw);
@@ -61,10 +69,16 @@ Blurry.Views = Blurry.Views || {};
       //this.imageCanvasContext.addEventListener('mousedown', startDraw);
       this.imagePlaceholder.bind('mousemove', $.proxy(this.updateMaskPosition, this));
       //this.imageCanvasContext.addEventListener('mouseup', stopDraw);
+    },
 
-      $('#points').html('Poäng: ' + this.points);
+    stopTrackMove: function() {
+      //this.imageCanvasContext.addEventListener('touchstart', startDraw);
+      this.imagePlaceholder.unbind('touchmove');
+      //this.imageCanvasContext.addEventListener('touchend', stopDraw);
 
-      this.drawImage();
+      //this.imageCanvasContext.addEventListener('mousedown', startDraw);
+      this.imagePlaceholder.unbind('mousemove');
+      //this.imageCanvasContext.addEventListener('mouseup', stopDraw);
     },
 
     updateMaskPosition: function(e) {
@@ -159,6 +173,9 @@ Blurry.Views = Blurry.Views || {};
       $('.js-next').show();
       this.points += this.currentDifficulty * 10;
       $('#points').html('Poäng: ' + this.points);
+
+      this.stopTrackMove(); // Don't trigger mask.
+      this.drawMask(150, 150, 1000); // Visa hela bilden.
     }
 
   });
