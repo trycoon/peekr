@@ -14,6 +14,7 @@ Blurry.Views = Blurry.Views || {};
     id: '',
 
     className: '',
+    points: 0,
 
     imagePlaceholder: undefined,
     imageCanvasContext: undefined,
@@ -61,6 +62,8 @@ Blurry.Views = Blurry.Views || {};
       this.imagePlaceholder.bind('mousemove', $.proxy(this.updateMaskPosition, this));
       //this.imageCanvasContext.addEventListener('mouseup', stopDraw);
 
+      $('#points').html('Poäng: ' + this.points);
+
       this.drawImage();
     },
 
@@ -80,12 +83,12 @@ Blurry.Views = Blurry.Views || {};
       if (this.currentImage) {
         var self = this;
 
-        // Ladda ner bilden som skall visas.
-        this.imageElement = new Image();
-        this.imageElement.onload = function() {
-          // Maskera och visa bilden när den är nerladdad.
-          self.drawMask(110, 70, self.holeSizes[self.currentDifficulty]);
-        };
+      // Ladda ner bilden som skall visas.
+      this.imageElement = new Image();
+      this.imageElement.onload = function() {
+        // Maskera och visa bilden när den är nerladdad.
+        self.drawMask(110, 70, self.holeSizes[self.currentDifficulty]);
+      };
 
         this.imageElement.src = this.currentImage.url;
       }
@@ -132,24 +135,32 @@ Blurry.Views = Blurry.Views || {};
 
       console.log('input ', validation);
       var answer = $('.answer');
-
+      var answerStr = '';
 
       if (validation) {
         answer.addClass('correct');
-        answer.html('Du gissade rätt!');
-        $('#inputContainer').hide();
-        $('.js-next').show();
-
-      } else {
-        answer.html('Det var fel namn...');
-        if (this.currentDifficulty > 0) {
+        answerStr = 'Du gissade rätt!';
+        this.showImage();
+      }else{
+        answerStr = 'Det var fel namn.';
+        if(this.currentDifficulty > 0){
           this.currentDifficulty--;
+        }else{
+          answerStr += ' Det var ' + this.currentImage.name;
+          this.showImage();
         }
       }
 
-      setTimeout(function() {
-      }, 500);
+      answer.html(answerStr);
+    },
+
+    showImage: function(){
+      $('#inputContainer').hide();
+      $('.js-next').show();
+      this.points += this.currentDifficulty * 10;
+      $('#points').html('Poäng: ' + this.points);
     }
+
   });
 
 })();
