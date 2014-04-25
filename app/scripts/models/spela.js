@@ -23,6 +23,20 @@ Blurry.Models = Blurry.Models || {};
     initialize: function() {
       this.userId = '105814678861633692185';
       this.albumid = '6005765907437818049';
+      this.getAccessToken();
+    },
+
+    /**
+     * Handle authentication against Google
+     * Is dependent of https://oauth.io/ where a account is needed in order to use the library.
+     */
+    getAccessToken: function() {
+      var access_token;
+      OAuth.initialize('BLyjDMMIj7nRjs2m3bCFWB0ZsTA');
+      OAuth.popup('google', function(error, result) {
+        return access_token = result.access_token;
+      });
+
     },
 
     defaults: {
@@ -39,10 +53,8 @@ Blurry.Models = Blurry.Models || {};
         return { url: value.content.src, name: value.summary['$t'] };
       });
 
-      // Bland om i listan.
       this.images = _.shuffle(this.images);
 
-      return this.images;
     },
 
     getImage: function() {
@@ -80,10 +92,18 @@ Blurry.Models = Blurry.Models || {};
     getRandomImage: function() {
       // Om inga bilder finns i listan, hämta dom från servern.
       if (this.images.length === 0) {
-        this.fetch();
+        this.fetch({dataType: 'jsonp', data: {
+          alt: 'json-in-script'
+        }});
       } else {
         // Returnera första bilden i listan och ta sedan bort den från listan så att vi inte får samma vid nästa anrop.
-        return this.images.shift();
+        var img = this.images.shift();
+
+        if(img.hasOwnProperty('url')){
+          return img;
+        }else{
+          this.getRandomImage();
+        }
       }
     }
 

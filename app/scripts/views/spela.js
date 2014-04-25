@@ -22,7 +22,8 @@ Blurry.Views = Blurry.Views || {};
     holeSizes: [30, 20, 15, 10],
 
     events: {
-      'click .js-validate': 'validateName'
+      'click .js-validate': 'validateName',
+      'click .js-next': 'render'
     },
     el: '#viewSpela',
 
@@ -32,11 +33,12 @@ Blurry.Views = Blurry.Views || {};
       }});
       this.listenTo(this.model, 'change', this.render);
       this.hide();
-      //this.render();
     },
 
     render: function() {
+      console.log('render')
       this.$el.html(this.template(this.model.toJSON()));
+      $('.js-next').hide();
       this.imagePlaceholder = $('#image');
       this.imageCanvas = this.imagePlaceholder[0].getContext('2d');
 
@@ -63,18 +65,20 @@ Blurry.Views = Blurry.Views || {};
     },
 
     drawImage: function() {
+      console.log('drawImage')
       this.currentImage = this.model.getImage();
-      var self = this;
+      if (this.currentImage) {
+        var self = this;
 
-      // Ladda ner bilden som skall visas.
-      this.imageElement = new Image();
-      this.imageElement.onload = function() {
-        // Maskera och visa bilden när den är nerladdad.
-        self.drawMask(110, 70, self.holeSizes[self.currentDifficulty]);
-      };
+        // Ladda ner bilden som skall visas.
+        this.imageElement = new Image();
+        this.imageElement.onload = function() {
+          // Maskera och visa bilden när den är nerladdad.
+          self.drawMask(110, 70, self.holeSizes[self.currentDifficulty]);
+        };
 
-      this.imageElement.src = this.currentImage.url;
-
+        this.imageElement.src = this.currentImage.url;
+      }
     },
 
     /***
@@ -118,9 +122,15 @@ Blurry.Views = Blurry.Views || {};
 
       if(validation){
         answer.addClass('correct');
-        answer.html('Rätt!');
+        answer.html('Du gissade rätt!');
+        $('#inputContainer').hide();
+        $('.js-next').show();
+
       }else{
         answer.html('Det var fel namn...');
+        if(this.currentDifficulty > 0){
+          this.currentDifficulty--;
+        }
       }
 
       setTimeout(function(){}, 500);
