@@ -8,13 +8,9 @@
     <script type="text/javascript">
         var access_token;
         OAuth.initialize('BLyjDMMIj7nRjs2m3bCFWB0ZsTA');
-        //Using popup (option 1)
         OAuth.popup('google', function(error, result) {
-            console.log(result);
-           // access_token = result.access_token;
-            console.log(error);
-            //handle error with error
-            //use result.access_token in your API request
+            access_token = result.access_token;
+            console.log('access_token: ' + access_token);
         });
 
         var resp;
