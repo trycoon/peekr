@@ -14,16 +14,13 @@ Blurry.Views = Blurry.Views || {};
     id: '',
 
     className: '',
-    points: 0,
 
     imagePlaceholder: undefined,
     imageCanvasContext: undefined,
-    imageOriginalCanvasContext: undefined,
-    imageOriginalCanvas: undefined,
     imageElement: undefined,
-    currentDifficulty: 3, // Index till holeSize, lägre = enklare.
-    holeSizes: [30, 20, 15, 10],
-
+    holeSizes: [30, 20, 15, 10],  // De olika storlekarna på masken (kikhålet).
+    holeX: $('#image').width() / 2,
+    holeY: $('#image').height() / 2,
     events: {
       'click .js-validate': 'validateName',
       'click .js-next': 'render'
@@ -36,9 +33,11 @@ Blurry.Views = Blurry.Views || {};
       }});
       this.listenTo(this.model, 'change', this.render);
       this.hide();
-      //this.render();
     },
 
+    /***
+     * Rita upp en ny bild.
+     */
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
       $('.js-next').hide();
@@ -48,15 +47,16 @@ Blurry.Views = Blurry.Views || {};
         window.alert('Din webbläsare saknar stöd för Canvas.');
       }
 
-      this.currentDifficulty = 3;
+      // Rensa state inför ny bild.
+      this.model.newImage();
+
+      $('.answer').html('');
 
       this.imageCanvasContext = this.imagePlaceholder[0].getContext('2d');
-      this.imageOriginalCanvas = document.createElement('canvas');
-      this.imageOriginalCanvasContext = this.imageOriginalCanvas.getContext('2d');
 
       this.startTrackMove();
 
-      $('#points').html('Poäng: ' + this.points);
+      this.printPoints();
 
       this.drawImage();
     },
@@ -84,27 +84,43 @@ Blurry.Views = Blurry.Views || {};
     updateMaskPosition: function(e) {
       var self = this;
 
+      // Uppdatera globala variabler så att vi hela tiden har koll på vart muspekaren är.
+      // Detta görs olika beroende på om man har en mus eller ett finger.
+      // Flytta sedan masken till pekarens position.
       if (e.type.indexOf('touch') >= 0) {
         var pos = e.touches.item(0);
-        self.drawMask(pos.clientX - pos.target.offsetLeft, pos.clientY - pos.target.offsetTop, self.currentHoleSize);
+        self.holyX = pos.clientX - pos.target.offsetLeft;
+        self.holeY = pos.clientY - pos.target.offsetTop;
       } else {
-        self.drawMask(e.offsetX, e.offsetY, self.holeSizes[self.currentDifficulty]);
+        self.holyX = e.offsetX;
+        self.holeY = e.offsetY;
       }
-    },
 
+      self.drawMask(self.holyX, self.holeY, self.holeSizes[self.model.currentDifficulty]);
+    },
+    printPoints: function() {
+      $('#points').html('Poängnivå: ' + this.model.points);
+      $('#totalPoints').html('Totala poäng: ' + this.model.totalPoints);
+    },
     drawImage: function() {
       this.currentImage = this.model.getImage();
       if (this.currentImage) {
         var self = this;
 
-      // Ladda ner bilden som skall visas.
-      this.imageElement = new Image();
-      this.imageElement.onload = function() {
-        // Maskera och visa bilden när den är nerladdad.
-        self.drawMask(110, 70, self.holeSizes[self.currentDifficulty]);
-      };
+        // Ladda ner bilden som skall visas.
+        this.imageElement = new Image();
+        this.imageElement.onload = function() {
+          // Maskera och visa bilden när den är nerladdad.
+          self.drawMask(self.holeX, self.holeY, self.holeSizes[self.model.currentDifficulty]);
+          // Starta lyssna på ord.
+          self.model.startListiningOnSpeech(function(word) {
+            self.validateName(word);
+          });
+        };
 
         this.imageElement.src = this.currentImage.url;
+        this.imageElement.style.width = $('#image').width() + 'px';
+        this.imageElement.style.height = $('#image').height() + 'px';
       }
     },
 
@@ -115,7 +131,7 @@ Blurry.Views = Blurry.Views || {};
      * @param holeRadius {number} Titthålets radie(storlek).
      */
     drawMask: function(holeX, holeY, holeRadius) {
-      this.imageCanvasContext.rect(0, 0, 300, 300);
+      this.imageCanvasContext.rect(0, 0, $('#image').width(), $('#image').height());
       this.imageCanvasContext.fillStyle = 'grey';
       this.imageCanvasContext.fill();
 
@@ -128,7 +144,7 @@ Blurry.Views = Blurry.Views || {};
       // Clip to the current path
       this.imageCanvasContext.clip();
 
-      this.imageCanvasContext.drawImage(this.imageElement, 0, 0, 300, 300);
+      this.imageCanvasContext.drawImage(this.imageElement, 0, 0, $('#image').width(), $('#image').height());
 
       // Undo the clipping
       this.imageCanvasContext.restore();
@@ -143,24 +159,47 @@ Blurry.Views = Blurry.Views || {};
       this.$el.hide();
     },
 
-    validateName: function(event) {
-      event.preventDefault();
-      var validation = this.model.validateName($('.js-input').val());
+    validateName: function(input) {
+      var guess;
+      if (typeof input === 'string') {
+        // Vid snack.
+        guess = input;
+      } else {
+        // Vid knapptryckning.
+        input.preventDefault();
+        guess = $('.js-input').val();
+      }
 
-      console.log('input ', validation);
+      var validation = this.model.validateName(guess);
+
+      console.log('Gissning "' + guess + '", var rätt? ' + validation);
+
       var answer = $('.answer');
       var answerStr = '';
 
       if (validation) {
+
         answer.addClass('correct');
         answerStr = 'Du gissade rätt!';
         this.showImage();
-      }else{
+
+      } else {
+
         answerStr = 'Det var fel namn.';
-        if(this.currentDifficulty > 0){
-          this.currentDifficulty--;
-        }else{
-          answerStr += ' Det var ' + this.currentImage.name;
+
+        if (this.model.lowerDifficulty()) {
+          var self = this;
+
+          // Rita hålet större, så att man inte behöver flytta muspekaren för att det skall synas att den är större.
+          this.drawMask(self.holyX, self.holeY, self.holeSizes[self.model.currentDifficulty]);
+          this.printPoints();
+          // Lyssna på ett nytt ord.
+          this.model.startListiningOnSpeech(function(word) {
+            self.validateName(word);
+          });
+        } else {
+          // Om gissningarna tog slut. Ge rätt svar och rita upp HELA bilden.
+          answerStr += ' Rätt svar var ' + this.currentImage.name;
           this.showImage();
         }
       }
@@ -168,14 +207,16 @@ Blurry.Views = Blurry.Views || {};
       answer.html(answerStr);
     },
 
-    showImage: function(){
+    /***
+     * Visa upp hela bilden. T.ex. vid rätt svar eller om man bränt alla sina försök.
+     */
+    showImage: function() {
       $('#inputContainer').hide();
       $('.js-next').show();
-      this.points += this.currentDifficulty * 10;
-      $('#points').html('Poäng: ' + this.points);
+      this.printPoints();
 
       this.stopTrackMove(); // Don't trigger mask.
-      this.drawMask(150, 150, 1000); // Visa hela bilden.
+      this.drawMask($('#image').width() / 2, $('#image').height() / 2, 1000); // Visa hela bilden (centrera hålet och gör det jättestort).
     }
 
   });

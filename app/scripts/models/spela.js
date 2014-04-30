@@ -14,13 +14,18 @@ Blurry.Models = Blurry.Models || {};
 
   Blurry.Models.Spela = Backbone.Model.extend({
 
+    points: 0,            // Hur mycket rätt svar på denna bild ger. Är beroende av nuvarande svårighetsgrad. (Tänk TV-programmet "På spåret").
+    totalPoints: 0,       // Hur mycket poäng har vi total ackumulerat hittils.
+    currentDifficulty: 3, // Svårighetsnivå, lägre = enklare. Fungerar som index till holeSize.
+
     url: function(){
-      return 'https://picasaweb.google.com/data/feed/api/user/' + this.userId +'/albumid/' + this.albumid
+      return 'https://picasaweb.google.com/data/feed/api/user/' + this.userId +'/albumid/' + this.albumid;
     },
 
     images: [],
 
     initialize: function() {
+      this.points = 1 + this.currentDifficulty * 2;
       this.userId = '105814678861633692185';
       this.albumid = '6005765907437818049';
       this.getAccessToken();
@@ -64,7 +69,37 @@ Blurry.Models = Blurry.Models || {};
 
     validateName: function(name) {
       console.log('validateName... ' + this.currentImage.name);
-      return this.currentImage.name.toLowerCase() === name.toLowerCase();
+      var correctAnswer = this.currentImage.name.toLowerCase() === name.toLowerCase();
+
+      if (correctAnswer) {
+        this.totalPoints += this.points;
+      }
+
+      return correctAnswer;
+    },
+
+    /***
+     * Anropa då man vill visa en ny bild, nollställer poängräknare och svårighetsnivå bl.a.
+     */
+    newImage: function() {
+      this.currentDifficulty = 3;
+      this.points = 1 + this.currentDifficulty * 2;
+    },
+    /***
+     * Minska svårighetsnivån. Hålet blir större, men bilden är värd mindre med poäng.
+     * @returns {boolean} Huruvida det gick att sänka svårighetsgraden, false=om man redan är på enklaste nivån.
+     */
+    lowerDifficulty: function() {
+      if (this.currentDifficulty === 0) {
+        this.points = 0;
+
+        return false;
+      }
+
+      this.currentDifficulty--;
+      this.points = 1 + this.currentDifficulty * 2;
+
+      return true;
     },
 
     /**

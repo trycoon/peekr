@@ -18,3 +18,8 @@ bower install
 
 # Starta applikation
 ``` grunt serve ```
+
+# Team Blurry
+
+Maria, Mikael, Jonas Karlsson, Henrik, Pim, Jonas Kulde.
+
