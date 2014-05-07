@@ -19,8 +19,8 @@ peekr.Views = peekr.Views || {};
     imageCanvasContext: undefined,
     imageElement: undefined,
     holeSizes: [30, 20, 15, 10],  // De olika storlekarna på masken (kikhålet).
-    holeX: $('#image').width() / 2,
-    holeY: $('#image').height() / 2,
+    holeX: undefined,
+    holeY: undefined,
     events: {
       'click .js-validate': 'validateName',
       'click .js-next': 'render'
@@ -41,11 +41,18 @@ peekr.Views = peekr.Views || {};
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
       $('.js-next').hide();
-      this.imagePlaceholder = $('#image');
+
+      this.imagePlaceholder = $('.imagecanvas');
 
       if (!this.imagePlaceholder[0].getContext) {
         window.alert('Din webbläsare saknar stöd för Canvas.');
       }
+
+      this.imagePlaceholder[0].width = this.imagePlaceholder.width();
+      this.imagePlaceholder[0].height = this.imagePlaceholder.height();
+      // Centrera mask-hål som startpunkt.
+      this.holeX = this.imagePlaceholder.width() / 2;
+      this.holeY = this.imagePlaceholder.height() / 2;
 
       // Rensa state inför ny bild.
       this.model.newImage();
@@ -129,7 +136,7 @@ peekr.Views = peekr.Views || {};
      * @param holeRadius {number} Titthålets radie(storlek).
      */
     drawMask: function(holeX, holeY, holeRadius) {
-      this.imageCanvasContext.rect(0, 0, $('#image').width(), $('#image').height());
+      this.imageCanvasContext.rect(0, 0, this.imagePlaceholder.width(), this.imagePlaceholder.height());
       this.imageCanvasContext.fillStyle = 'grey';
       this.imageCanvasContext.fill();
 
@@ -190,11 +197,16 @@ peekr.Views = peekr.Views || {};
 
           // Rita hålet större, så att man inte behöver flytta muspekaren för att det skall synas att den är större.
           this.drawMask(self.holyX, self.holeY, self.holeSizes[self.model.currentDifficulty]);
+
           this.printPoints();
+
           // Lyssna på ett nytt ord.
           this.model.startListiningOnSpeech(function(word) {
             self.validateName(word);
           });
+
+          $('.js-input').val('').focus();
+
         } else {
           // Om gissningarna tog slut. Ge rätt svar och rita upp HELA bilden.
           answerStr += ' Rätt svar var "' + this.currentImage.name + '"';
@@ -214,7 +226,7 @@ peekr.Views = peekr.Views || {};
       this.printPoints();
 
       this.stopTrackMove(); // Don't trigger mask.
-      this.drawMask($('#image').width() / 2, $('#image').height() / 2, 1000); // Visa hela bilden (centrera hålet och gör det jättestort).
+      this.drawMask(this.imagePlaceholder.width() / 2, this.imagePlaceholder.height() / 2, 1000); // Visa hela bilden (centrera hålet och gör det jättestort).
     }
 
   });

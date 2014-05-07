@@ -38,7 +38,7 @@ peekr.Models = peekr.Models || {};
     getAccessToken: function() {
       var access_token;
       OAuth.initialize('BLyjDMMIj7nRjs2m3bCFWB0ZsTA');
-      OAuth.popup('google', function(error, result) {
+      OAuth.popup('google', {cache: true},function(error, result) {
         return access_token = result.access_token;
       });
 
