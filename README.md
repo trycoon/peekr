@@ -2,7 +2,7 @@
 
 Bildgissningsspel med 80-tals touch.
 
-https://github.com/trycoon/peekr
+http://trycoon.github.io/peekr/
 
 ## Instruktioner
 
@@ -22,10 +22,20 @@ npm install
 bower install
 ```
 
-## Starta applikation
+## Starta applikation in utvecklingsläge
 ``` grunt serve ```
 
-## Team peekr på Hackathon 2014
+## Team Blurry på Hackathon 2014
 
-Maria Öberg, Mikael Dahlström, Jonas Karlsson, Henrik Östman, Pim Lindahl, Jonas Kulde.
+Maria Öberg
+
+Mikael Dahlström
+
+Jonas Karlsson
+
+Henrik Östman
+
+Pim Lindahl
+
+Jonas Kulde.
 
