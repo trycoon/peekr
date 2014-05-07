@@ -1,11 +1,11 @@
-/*global Blurry, Backbone, JST*/
+/*global peekr, Backbone, JST*/
 
-Blurry.Views = Blurry.Views || {};
+peekr.Views = peekr.Views || {};
 
 (function() {
   'use strict';
 
-  Blurry.Views.Spela = Backbone.View.extend({
+  peekr.Views.Spela = Backbone.View.extend({
 
     template: JST['app/scripts/templates/spela.hbs'],
 
@@ -119,8 +119,6 @@ Blurry.Views = Blurry.Views || {};
         };
 
         this.imageElement.src = this.currentImage.url;
-        this.imageElement.style.width = $('#image').width() + 'px';
-        this.imageElement.style.height = $('#image').height() + 'px';
       }
     },
 
@@ -144,7 +142,7 @@ Blurry.Views = Blurry.Views || {};
       // Clip to the current path
       this.imageCanvasContext.clip();
 
-      this.imageCanvasContext.drawImage(this.imageElement, 0, 0, $('#image').width(), $('#image').height());
+      this.imageCanvasContext.drawImage(this.imageElement, 0, 0);
 
       // Undo the clipping
       this.imageCanvasContext.restore();
@@ -199,7 +197,7 @@ Blurry.Views = Blurry.Views || {};
           });
         } else {
           // Om gissningarna tog slut. Ge rätt svar och rita upp HELA bilden.
-          answerStr += ' Rätt svar var ' + this.currentImage.name;
+          answerStr += ' Rätt svar var "' + this.currentImage.name + '"';
           this.showImage();
         }
       }

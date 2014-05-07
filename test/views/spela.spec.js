@@ -4,7 +4,7 @@
 describe('Spela View', function () {
 
     beforeEach(function () {
-        this.SpelaView = new Blurry.Views.Spela();
+        this.SpelaView = new peekr.Views.Spela();
     });
 
 });

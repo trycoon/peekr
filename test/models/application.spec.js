@@ -4,7 +4,7 @@
 describe('Application Model', function () {
 
     beforeEach(function () {
-        this.ApplicationModel = new Blurry.Models.Application();
+        this.ApplicationModel = new peekr.Models.Application();
     });
 
 });

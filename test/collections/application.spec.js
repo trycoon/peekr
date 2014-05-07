@@ -4,7 +4,7 @@
 describe('Application Collection', function () {
 
     beforeEach(function () {
-        this.ApplicationCollection = new Blurry.Collections.Application();
+        this.ApplicationCollection = new peekr.Collections.Application();
     });
 
 });

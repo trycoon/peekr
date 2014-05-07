@@ -4,7 +4,7 @@
 describe('Application View', function () {
 
     beforeEach(function () {
-        this.ApplicationView = new Blurry.Views.Application();
+        this.ApplicationView = new peekr.Views.Application();
     });
 
 });

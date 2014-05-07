@@ -1,7 +1,7 @@
 {
   "generator-backbone": {
     "appPath": "app",
-    "appName": "Blurry",
+    "appName": "peekr",
     "coffee": false,
     "testFramework": "mocha",
     "templateFramework": "lodash",

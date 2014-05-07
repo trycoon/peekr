@@ -1,6 +1,6 @@
-/*global Blurry, Backbone, Picasa*/
+/*global peekr, Backbone, Picasa*/
 
-Blurry.Models = Blurry.Models || {};
+peekr.Models = peekr.Models || {};
 
 (function() {
   'use strict';
@@ -12,7 +12,7 @@ Blurry.Models = Blurry.Models || {};
       window.oSpeechRecognition ||
       window.SpeechRecognition;
 
-  Blurry.Models.Spela = Backbone.Model.extend({
+  peekr.Models.Spela = Backbone.Model.extend({
 
     points: 0,            // Hur mycket rätt svar på denna bild ger. Är beroende av nuvarande svårighetsgrad. (Tänk TV-programmet "På spåret").
     totalPoints: 0,       // Hur mycket poäng har vi total ackumulerat hittils.

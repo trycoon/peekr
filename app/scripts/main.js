@@ -1,7 +1,7 @@
-/*global Blurry, $*/
+/*global peekr, $*/
 
 
-window.Blurry = {
+window.peekr = {
   Models: {},
   Collections: {},
   Views: {},
@@ -19,5 +19,5 @@ window.Blurry = {
 
 $(document).ready(function() {
   'use strict';
-  Blurry.init();
+  peekr.init();
 });

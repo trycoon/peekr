@@ -6,6 +6,8 @@ body {
 
 #image {
     border: 1px solid;
+    width: 300px;
+    height: 300px;
 }
 
 .answer {

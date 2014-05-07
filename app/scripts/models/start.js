@@ -1,11 +1,11 @@
-/*global Blurry, Backbone*/
+/*global peekr, Backbone*/
 
-Blurry.Models = Blurry.Models || {};
+peekr.Models = peekr.Models || {};
 
 (function() {
   'use strict';
 
-  Blurry.Models.Start = Backbone.Model.extend({
+  peekr.Models.Start = Backbone.Model.extend({
 
     url: '',
 

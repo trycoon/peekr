@@ -4,7 +4,7 @@
 describe('Spela Model', function () {
 
     beforeEach(function () {
-        this.SpelaModel = new Blurry.Models.Spela();
+        this.SpelaModel = new peekr.Models.Spela();
     });
 
 });

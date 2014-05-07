@@ -1,11 +1,11 @@
-/*global Blurry, Backbone, JST*/
+/*global peekr, Backbone, JST*/
 
-Blurry.Views = Blurry.Views || {};
+peekr.Views = peekr.Views || {};
 
 (function() {
   'use strict';
 
-  Blurry.Views.Start = Backbone.View.extend({
+  peekr.Views.Start = Backbone.View.extend({
 
     template: JST['app/scripts/templates/start.hbs'],
 
@@ -21,7 +21,7 @@ Blurry.Views = Blurry.Views || {};
     el: '#viewContent',
     toggel: function() {
 
-      Blurry.Routers.router.navigate('spela', {trigger: true});
+      peekr.Routers.router.navigate('spela', {trigger: true});
     },
 
     initialize: function() {

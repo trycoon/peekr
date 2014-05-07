@@ -1,11 +1,11 @@
-/*global Blurry, Backbone*/
+/*global peekr, Backbone*/
 
-Blurry.Routers = Blurry.Routers || {};
+peekr.Routers = peekr.Routers || {};
 
 (function() {
   'use strict';
 
-  Blurry.Routers.Application = Backbone.Router.extend({
+  peekr.Routers.Application = Backbone.Router.extend({
     routes: {
       '': 'start',
       'spela': 'spela'
@@ -15,7 +15,7 @@ Blurry.Routers = Blurry.Routers || {};
       if (this.currentView) {
         this.currentView.hide();
       } else {
-        Blurry.Views.start.hide();
+        peekr.Views.start.hide();
       }
 
       if (view) {
@@ -30,12 +30,12 @@ Blurry.Routers = Blurry.Routers || {};
 
     start: function() {
       console.log('routa start')
-      this.changeView(Blurry.Views.start);
+      this.changeView(peekr.Views.start);
     },
 
     spela: function() {
       console.log('routa spela')
-      this.changeView(Blurry.Views.spela);
+      this.changeView(peekr.Views.spela);
     }
   });
 

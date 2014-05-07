@@ -1,13 +1,13 @@
-/*global Blurry, Backbone*/
+/*global peekr, Backbone*/
 
-Blurry.Collections = Blurry.Collections || {};
+peekr.Collections = peekr.Collections || {};
 
 (function () {
     'use strict';
 
-    Blurry.Collections.Application = Backbone.Collection.extend({
+    peekr.Collections.Application = Backbone.Collection.extend({
 
-        model: Blurry.Models.Application
+        model: peekr.Models.Application
 
     });
 

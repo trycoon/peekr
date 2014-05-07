@@ -4,7 +4,7 @@
 describe('Start Model', function () {
 
     beforeEach(function () {
-        this.StartModel = new Blurry.Models.Start();
+        this.StartModel = new peekr.Models.Start();
     });
 
 });
